@@ -16,7 +16,7 @@ export const hashPassword = async (password) => {
     return bcrypt.hash(password, salt);
 }
 
-export const isValidPass = (password, hash) => {
+export const comparePasswords = (password, hash) => {
     return bcrypt.compare(password, hash);
 }
 
