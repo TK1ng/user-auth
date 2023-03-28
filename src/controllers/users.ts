@@ -9,7 +9,7 @@ export const createNewUser = async (req, res) => {
             name,
             password: await hashPassword(password)
         }
-    });
+    }).catch(err => console.log(err));
 
     const token = createJWT(newUser);
     res.json({ token });
@@ -40,6 +40,7 @@ export const signIn = async (req, res) => {
         const token = createJWT(rdmeUser);
         const url = new URL(process.env.HUB_URL);
         url.searchParams.set('auth_token', token);
+        res.status(200);
         return res.redirect(url);
     }
 
