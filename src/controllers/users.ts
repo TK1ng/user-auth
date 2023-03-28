@@ -40,7 +40,6 @@ export const signIn = async (req, res) => {
         const token = createJWT(rdmeUser);
         const url = new URL(process.env.HUB_URL);
         url.searchParams.set('auth_token', token);
-        res.status(200);
         return res.redirect(url);
     }
 
