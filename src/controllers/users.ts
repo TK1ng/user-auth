@@ -30,9 +30,18 @@ export const signIn = async (req, res) => {
             return res.json({ message: 'Unable to login' });
         }
 
-        const token = createJWT(user);
+        const rdmeUser = {
+            name: user.name,
+            email: user.username,
+            apiKey: user.apiKey,
+            version: 1
+        }
+
+        const token = createJWT(rdmeUser);
+        const url = new URL(process.env.HUB_URL);
+        url.searchParams.set('auth_token', token);
         res.status(200);
-        return res.json({ token });
+        return res.redirect(url);
     }
 
     res.status(400);
