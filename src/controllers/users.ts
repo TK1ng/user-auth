@@ -41,7 +41,7 @@ export const signIn = async (req, res) => {
         const url = new URL(process.env.HUB_URL);
         url.searchParams.set('auth_token', token);
         res.status(200);
-        return res.redirect(url);
+        return res.json({ data: url });
     }
 
     res.status(400);
